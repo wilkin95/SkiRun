@@ -56,7 +56,6 @@ namespace SkiRunRater
 
             return skiRunClassList;
         }
- 
 
         /// <summary>
         /// method to write all of the list of ski runs to the text file
@@ -73,7 +72,6 @@ namespace SkiRunRater
                 foreach (SkiRun skiRun in _skiRuns)
                 {
                     skiRunString = skiRun.ID + "," + skiRun.Name + "," + skiRun.Vertical;
-
                     sWriter.WriteLine(skiRunString);
                 }
             }
@@ -85,60 +83,25 @@ namespace SkiRunRater
         /// <param name="skiRun"></param>
         public void InsertSkiRun(SkiRun skiRun)
         {
-           // List<SkiRun> skiRuns = new List<SkiRun>();
-            string skiRunString;
-            int vertical;
-            skiRunString = skiRun.ID + "," + skiRun.Name + "," + skiRun.Vertical;
-
-            Console.WriteLine("Please enter the name of your ski run.");
-            skiRun.Name = Console.ReadLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Please enter the vertical drop of " + skiRun.Name);
-            string response = Console.ReadLine();
-            if(Int32.TryParse(response, out vertical))
-            {
-                skiRun.Vertical = vertical;
-            }
-
-           
-
-            _skiRuns.Add(new SkiRun() { ID = 1, Name = skiRun.Name, Vertical = skiRun.Vertical });
-
-
+            _skiRuns.Add(skiRun); 
             WriteSkiRunsData();
-
-
         }
 
         /// <summary>
         /// method to delete a ski run by ski run ID
         /// </summary>
         /// <param name="ID"></param>
-        public void DeleteSkiRun( )
+        public void DeleteSkiRun(int ID)
         {
-            
-            int ID;
-            string name;
-            Console.WriteLine();
-            Console.WriteLine("Please choose the ID of the ski run you wish to delete from the list.");
-            string response = Console.ReadLine();
-            if(Int32.TryParse(response, out ID))
+            for (int index = 0; index < _skiRuns.Count(); index++)
             {
-                SkiRun skiRun = GetSkiRunByID(ID);
-
-                for (int index = 0; index < _skiRuns.Count(); index++)
+                if (_skiRuns[index].ID == ID)
                 {
-                    if (_skiRuns[index].ID == ID)
-                    {
-                         name = skiRun.Name;
-                        _skiRuns.RemoveAt(index);
-                        ConsoleView.DisplayMessage("Ski Run " + skiRun.Name + " has been deleted.");
-
-                    }
+                    _skiRuns.RemoveAt(index);
                 }
             }
-             WriteSkiRunsData();
+
+            WriteSkiRunsData();
         }
 
         /// <summary>
@@ -159,33 +122,8 @@ namespace SkiRunRater
         {
             SkiRun skiRun = null;
 
-            //
-            // run through the ski run list and grab the correct one
-            //
-            foreach (SkiRun location in _skiRuns)
-            {
-                if (location.ID == ID)
-                {
-                    skiRun = location;
-                }
-            }
-
-            //
-            // the specified ID was not found 
-            // throw an exception
-            //
-            if (skiRun == null)
-            {
-                string feedbackMessage = $"The ID {ID} does not exist.";
-                throw new ArgumentException(ID.ToString(), feedbackMessage);
-            }
-
             return skiRun;
         }
-
-
-
-         
 
         /// <summary>
         /// method to return a list of ski run objects

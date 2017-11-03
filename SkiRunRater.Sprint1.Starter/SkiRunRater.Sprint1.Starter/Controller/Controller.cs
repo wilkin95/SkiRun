@@ -43,7 +43,11 @@ namespace SkiRunRater
                 while (active)
                 {
                     AppEnum.ManagerAction userActionChoice;
-                     
+                    int vertical;
+                    int skiRunID;
+                    SkiRun skiRun;
+                    string message;
+
                     userActionChoice = ConsoleView.GetUserActionChoice();
 
                     switch (userActionChoice)
@@ -55,16 +59,23 @@ namespace SkiRunRater
                             ConsoleView.DisplayContinuePrompt();
                             break;
                         case AppEnum.ManagerAction.DisplaySkiRunDetail:
+                             ConsoleView.DisplayAllSkiRuns(skiRuns);
+                            skiRun = skiRunRepository.GetSkiRunByID(ConsoleView.DisplayGetSkiRunID(skiRuns));
+                            ConsoleView.DisplaySkiRunDetails(skiRuns);
                             break;
-                        case AppEnum.ManagerAction.DeleteSkiRun:                                           
+                        case AppEnum.ManagerAction.DeleteSkiRun:                            
+                            skiRunRepository.DeleteSkiRun(ConsoleView.DisplayGetSkiRunID(skiRuns));
                             ConsoleView.DisplayReset();
-                            ConsoleView.DisplayAllSkiRuns(skiRuns);
-                            skiRunRepository.DeleteSkiRun();
-                           
+                            ConsoleView.DisplayMessage("Ski Run has been deleted.");
                             ConsoleView.DisplayContinuePrompt();
                             break;
                         case AppEnum.ManagerAction.AddSkiRun:
-                            skiRunRepository.InsertSkiRun(skiRuns);
+                            skiRun = new SkiRun();
+                            skiRun.Name = ConsoleView.DisplayGetSkiRunName();
+                            skiRun.Vertical = ConsoleView.DisplayGetSkiRunVertical();
+                            skiRunRepository.InsertSkiRun(skiRun);
+                            ConsoleView.DisplayAllSkiRuns(skiRuns);
+                            ConsoleView.DisplayNewSkiRunMessage();
                             break;
                         case AppEnum.ManagerAction.UpdateSkiRun:
                             break;
