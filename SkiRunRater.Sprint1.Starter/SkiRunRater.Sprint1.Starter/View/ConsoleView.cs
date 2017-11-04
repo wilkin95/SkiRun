@@ -63,6 +63,8 @@ namespace SkiRunRater
                 leftTab + "2. Delete the Ski Run" + Environment.NewLine +
                 leftTab + "3. Add a new ski Run" + Environment.NewLine +
                 leftTab + "4. Display Ski Run Details" + Environment.NewLine +
+                leftTab + "5. Update a Ski Run by ID" + Environment.NewLine +
+                leftTab + "6. Display Ski Runs by vertical" + Environment.NewLine +
                 leftTab + "E. Exit" + Environment.NewLine);
 
             DisplayMessage("");
@@ -82,6 +84,12 @@ namespace SkiRunRater
                     break;
                 case '4':
                     userActionChoice = AppEnum.ManagerAction.DisplaySkiRunDetail;
+                    break;
+                case '5':
+                    userActionChoice = AppEnum.ManagerAction.UpdateSkiRun;
+                    break;
+                case '6':
+                    userActionChoice = AppEnum.ManagerAction.QuerySkiRunsByVertical;
                     break;
                 case 'E':
                 case 'e':
@@ -154,6 +162,20 @@ namespace SkiRunRater
 
             return name;
 
+        }
+
+        public static int DisplayGetSkiRunID()
+        {
+            Console.Clear();
+            int id;
+            Console.WriteLine();
+            DisplayPromptMessage("Enter the ID of the ski run.");
+
+            while (!int.TryParse(Console.ReadLine(), out id)) {
+                DisplayPromptMessage("Sorry, but the ID needs to be a number. Please try again.");
+            };
+
+            return id;
         }
 
         public static int DisplayGetSkiRunIDChoice(List<SkiRun> skiRuns)

@@ -110,6 +110,48 @@ namespace SkiRunRater
         /// <param name="skiRun">ski run object</param>
         public void UpdateSkiRun(SkiRun skiRun)
         {
+            string tabLeft = ConsoleUtil.FillStringWithSpaces(ViewSettings.DISPLAY_HORIZONTAL_MARGIN);
+
+            //Finds the ID of the skirun you wish to change
+            for (int index = 0; index < _skiRuns.Count(); index++)
+            {
+                if (_skiRuns[index].ID == skiRun.ID)
+                {
+                    skiRun.Name = _skiRuns[index].Name;
+                    skiRun.Vertical = _skiRuns[index].Vertical;
+
+                    //The remove is here because it's going to add the skirun back at the 
+                    //end of the update.
+                    _skiRuns.RemoveAt(index);
+                }
+            }
+
+            //Gets a new name. If the user does not input anything, it keeps the old one.
+            Console.WriteLine(tabLeft + "Changing Name. If you wish to keep the same name, just hit enter.");
+            Console.Write(tabLeft);
+            string nameChange = Console.ReadLine();
+            if (nameChange != "")
+            {
+                skiRun.Name = nameChange;
+            }
+
+            //Gets a new vertical. If the user does not input anything, it keeps the old one.
+            Console.WriteLine(tabLeft + "Changeing Vertical. If you wish to keep the same vertical, just hit enter.");
+            Console.Write(tabLeft);
+            string verticalChangeCheck = Console.ReadLine();
+            int verticalChange;
+            if (verticalChangeCheck != "")
+            {
+                while (!int.TryParse(verticalChangeCheck, out verticalChange))
+                {
+                    ConsoleView.DisplayPromptMessage("Sorry, but the ID needs to be a number. Please try again.");
+                };
+                skiRun.Vertical = verticalChange;
+            }
+
+            //Adds the skirun to the list and writes the list.
+            _skiRuns.Add(skiRun);
+            WriteSkiRunsData();
 
         }
 
@@ -123,7 +165,6 @@ namespace SkiRunRater
             SkiRun skiRun;
             List<SkiRun> ski2 = new List<SkiRun>();
             bool valid = true;
-            string skiRunString;
             foreach (SkiRun skiRuns in _skiRuns )
             {
                 if(skiRuns.ID == ID)
@@ -158,8 +199,62 @@ namespace SkiRunRater
         public List<SkiRun> QueryByVertical(int minimumVertical, int maximumVertical)
         {
             List<SkiRun> matchingSkiRuns = new List<SkiRun>();
-
+            for (int index = 0; index < _skiRuns.Count(); index++)
+            {
+                if (minimumVertical <= _skiRuns[index].Vertical && _skiRuns[index].Vertical <= maximumVertical)
+                {
+                    matchingSkiRuns.Add(_skiRuns[index]);
+                }
+            }
             return matchingSkiRuns;
+        }
+
+        public int GetMinimumVertical()
+        {
+            int minimumVertical = 0;
+
+            //gets the minimum vertical from the user and checks to see if 
+            //it is a vaild responce. The default is zero.
+
+            Console.WriteLine(Environment.NewLine + "Please enter a minimum vertical you wish to query by:");
+            while (!int.TryParse(Console.ReadLine(), out minimumVertical))
+            {
+                ConsoleView.DisplayPromptMessage("Sorry, but the Vertical needs to be a valid number. Please try again.");
+                Console.WriteLine();
+            };
+
+            return minimumVertical;
+        }
+
+        public int GetMaximumVertical()
+        {
+            int maximumVertical = 0;
+
+            //gets the maximum vertical from the user and checks to see if 
+            //it is a vaild responce. The default is zero.
+            Console.WriteLine("Please enter a maximum vertical you wish to query by:");
+            while (!int.TryParse(Console.ReadLine(), out maximumVertical))
+            {
+                ConsoleView.DisplayPromptMessage("Sorry, but the Vertical needs to be a valid number. Please try again.");
+                Console.WriteLine();
+            };
+
+            return maximumVertical;
+        }
+
+        public void DisplayQueriedVertical(List<SkiRun> matchingSkiRuns)
+        {
+            foreach (SkiRun queriedSkiRun in matchingSkiRuns)
+            {
+                StringBuilder skiRunInfo = new StringBuilder();
+
+                skiRunInfo.Append(queriedSkiRun.ID.ToString().PadRight(8));
+                skiRunInfo.Append(queriedSkiRun.Name.PadRight(25));
+                skiRunInfo.Append(queriedSkiRun.Vertical.ToString().PadRight(5));
+
+                ConsoleView.DisplayMessage(skiRunInfo.ToString());
+            }
+            Console.ReadLine();
         }
 
         /// <summary>

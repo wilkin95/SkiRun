@@ -60,7 +60,7 @@ namespace SkiRunRater
                             ConsoleView.DisplayContinuePrompt();
                             break;
                         case AppEnum.ManagerAction.DisplaySkiRunDetail:
-                             ConsoleView.DisplayAllSkiRuns(skiRuns);
+                            ConsoleView.DisplayAllSkiRuns(skiRuns);
                             ski2 = skiRunRepository.GetSkiRunByID(ConsoleView.DisplayGetSkiRunIDChoice(skiRuns));
                             ConsoleView.DisplaySkiRunDetails(ski2);
                             ConsoleView.DisplayContinuePrompt();
@@ -73,16 +73,37 @@ namespace SkiRunRater
                             ConsoleView.DisplayContinuePrompt();
                             break;
                         case AppEnum.ManagerAction.AddSkiRun:
+                            
                             skiRun = new SkiRun();
+                            skiRun.ID = ConsoleView.DisplayGetSkiRunID();
                             skiRun.Name = ConsoleView.DisplayGetSkiRunName();
                             skiRun.Vertical = ConsoleView.DisplayGetSkiRunVertical();
                             skiRunRepository.InsertSkiRun(skiRun);
                             ConsoleView.DisplayAllSkiRuns(skiRuns);
                             ConsoleView.DisplayNewSkiRunMessage();
+                            
                             break;
                         case AppEnum.ManagerAction.UpdateSkiRun:
+
+                            skiRun = new SkiRun();
+                            skiRun.ID = ConsoleView.DisplayGetSkiRunIDChoice(skiRuns);
+                            skiRunRepository.UpdateSkiRun(skiRun);
+
+                            Console.WriteLine();
+
                             break;
                         case AppEnum.ManagerAction.QuerySkiRunsByVertical:
+                            int minimumVertical = skiRunRepository.GetMinimumVertical();
+                            int maximumVertical = skiRunRepository.GetMaximumVertical();
+                            
+                            //Sorts all the aviable entries and pushes out those that match into a new list.
+                            List<SkiRun> matchingSkiRuns = skiRunRepository.QueryByVertical(minimumVertical, maximumVertical);
+                            ConsoleView.DisplayReset();
+
+                            //Displays the new list.
+                            Console.WriteLine("Ski Runs with a vertical between " + minimumVertical + " and " + maximumVertical + ".");
+                            skiRunRepository.DisplayQueriedVertical(matchingSkiRuns);
+
                             break;
                         case AppEnum.ManagerAction.Quit:
                             active = false;
