@@ -28,3 +28,10 @@ C:\Users\twilk\Desktop\SkiRunRater.Sprint1.Starter\SkiRunRater.Sprint1.Starter\b
 C:\Users\twilk\Desktop\SkiRunRater.Sprint1.Starter\SkiRunRater.Sprint1.Starter\bin\Debug\SkiRunRater.Sprint1.Starter.exe
 C:\Users\twilk\Desktop\SkiRunRater.Sprint1.Starter\SkiRunRater.Sprint1.Starter\bin\Debug\SkiRunRater.Sprint1.Starter.pdb
 C:\Users\twilk\Desktop\SkiRunRater.Sprint1.Starter\SkiRunRater.Sprint1.Starter\obj\Debug\SkiRunRater.Sprint1.Starter.csprojResolveAssemblyReference.cache
+C:\Users\twilk\Desktop\Ski\SkiRun\SkiRunRater.Sprint1.Starter\SkiRunRater.Sprint1.Starter\bin\Debug\SkiRunRater.Sprint1.Starter.exe.config
+C:\Users\twilk\Desktop\Ski\SkiRun\SkiRunRater.Sprint1.Starter\SkiRunRater.Sprint1.Starter\obj\Debug\SkiRunRater.Sprint1.Starter.exe
+C:\Users\twilk\Desktop\Ski\SkiRun\SkiRunRater.Sprint1.Starter\SkiRunRater.Sprint1.Starter\obj\Debug\SkiRunRater.Sprint1.Starter.pdb
+C:\Users\twilk\Desktop\Ski\SkiRun\SkiRunRater.Sprint1.Starter\SkiRunRater.Sprint1.Starter\bin\Debug\Data\Data.txt
+C:\Users\twilk\Desktop\Ski\SkiRun\SkiRunRater.Sprint1.Starter\SkiRunRater.Sprint1.Starter\bin\Debug\SkiRunRater.Sprint1.Starter.exe
+C:\Users\twilk\Desktop\Ski\SkiRun\SkiRunRater.Sprint1.Starter\SkiRunRater.Sprint1.Starter\bin\Debug\SkiRunRater.Sprint1.Starter.pdb
+C:\Users\twilk\Desktop\Ski\SkiRun\SkiRunRater.Sprint1.Starter\SkiRunRater.Sprint1.Starter\obj\Debug\SkiRunRater.Sprint1.Starter.csprojResolveAssemblyReference.cache

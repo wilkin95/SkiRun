@@ -23,5 +23,7 @@ namespace SkiRunRater
             this.Name = Name;
             this.Vertical = vertical;
         }
+
+       
     }
 }

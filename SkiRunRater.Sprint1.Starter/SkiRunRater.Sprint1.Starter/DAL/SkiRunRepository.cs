@@ -118,11 +118,26 @@ namespace SkiRunRater
         /// </summary>
         /// <param name="ID">int ID</param>
         /// <returns>ski run object</returns>
-        public SkiRun GetSkiRunByID(int ID)
+        public List<SkiRun> GetSkiRunByID(int ID)
         {
-            SkiRun skiRun = null;
+            SkiRun skiRun;
+            List<SkiRun> ski2 = new List<SkiRun>();
+            bool valid = true;
+            string skiRunString;
+            foreach (SkiRun skiRuns in _skiRuns )
+            {
+                if(skiRuns.ID == ID)
+                {
+                    ski2.Add(skiRuns);
+                   
+                }
+                else
+                {
+                    valid = false;
+                }
+            }
 
-            return skiRun;
+            return ski2;
         }
 
         /// <summary>

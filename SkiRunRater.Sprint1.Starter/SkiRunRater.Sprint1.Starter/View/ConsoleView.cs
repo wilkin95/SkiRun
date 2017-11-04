@@ -156,7 +156,7 @@ namespace SkiRunRater
 
         }
 
-        public static int DisplayGetSkiRunID(List<SkiRun> skiRuns)
+        public static int DisplayGetSkiRunIDChoice(List<SkiRun> skiRuns)
         {
             int skiRunID = -1;
             bool validResponse = false;
@@ -185,7 +185,7 @@ namespace SkiRunRater
         {
             DisplayReset();
 
-            DisplayMessage("All of the existing ski runs are displayed below;");
+            DisplayMessage("Your chosen ski run details are displayed below;");
             Console.WriteLine();
             DisplayMessage("");
 
